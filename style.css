@@ -169,6 +169,20 @@ a:hover {
   right:9px;
 }
 
+#howTo {
+  height:50px;
+  width:500px;
+  position:relative;
+  bottom:925px;
+  right:240px;
+  text-align:center;
+  font-size:40px;
+  font-family:shadows into light;
+
+
+
+}
+
 }
 /*Responsive canvas for main game*/
 canvas {
