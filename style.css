@@ -1,3 +1,7 @@
+/*Center and stlying for main menu*/
+body {
+  background:orange;
+}
 /*Responsive canvas for main game*/
 canvas {
     position: absolute;
