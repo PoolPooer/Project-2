@@ -34,7 +34,6 @@ a:hover {
 
 }
 
-
 #menu {
   width:0px;
   height:0px;
@@ -109,36 +108,6 @@ a:hover {
   right:9px;
 }
 
-#name {
-  height:50px;
-  width:400px;
-  background:#006680;
-  position:relative;
-  bottom:920px;
-  right:200px;
-  font-size:30px;
-  text-align:center;
-  font-family:shadows into light;
-  color:orange;
-   -webkit-transition:0.5s;
-  transition:0.5s;
-  cursor:pointer
-}
-
-/*mouse over effect for menu*/
-#name:hover {
-  background:black;
-  color:white;
-  -webkit-transform:rotate(-2deg);
-  transform:rotate(-2deg);
-}
-
-#name p {
-  position:relative;
-  top:0px;
-  right:4px;
-}
-
 #mainMenu {
   height:50px;
   width:500px;
@@ -178,12 +147,8 @@ a:hover {
   text-align:center;
   font-size:40px;
   font-family:shadows into light;
-
-
-
 }
 
-}
 /*Responsive canvas for main game*/
 canvas {
     position: absolute;
