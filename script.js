@@ -56,3 +56,120 @@ class Bee {
     this.color = 'rgb(' + this.randomColors[0] +  ',' + this.randomColors[1] +  ',' + this.randomColors[2] + ')';
 
   }
+
+
+  update(deltatime){
+    if (this.y < 0 || this.y > canvas.height - this.height){
+      this.directionY = this.directionY * -1;
+    }
+    this.x -= this.directionX;
+    this.y += this.directionY;
+    if (this.x < 0 - this.width) this.markedForDeletion = true;
+    this.timeSinceFlap += deltatime;
+    if(this.timeSinceFlap > this.flapInterval){
+      if(this.frame > this.maxFrame) this.frame = 0;
+      else this.frame++;
+      this.timeSinceFlap = 0;
+    }
+    // if a bee reaches the left side of the screen its game over
+    if(this.x < 0 - this.width) gameOver = true;
+  }
+
+  draw(){
+    collisionCtx.fillStyle = this.color;
+    collisionCtx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+  }
+}
+
+//copy of bees, assigned explosion effects where succesful
+let explosions = [];
+class Explosion {
+  constructor(x, y, size){
+    this.image = new Image();
+    this.image.src = 'assets/boom.png';
+    this.spriteWidth = 200;
+    this.spriteHeight = 179;
+    this.size = size;
+    this.x = x;
+    this.y = y;
+    this.frame = 0;
+    this.sound = new Audio ();
+    this.sound.src = 'assets/boom.wav';
+    this.timeSinceLastFrame = 0;
+    this.frameInterval = 200;
+    this.markedForDeletion = false;
+  }
+  update(deltatime){
+    if (this.frame === 0) this.sound.play();
+    this.timeSinceLastFrame += deltatime;
+    if (this.timeSinceLastFrame > this.frameInterval){
+      this.frame++;
+      this.timeSinceLastFrame = 0;
+      if(this.frame > 5) this.markedForDeletion = true;
+    }
+  }
+
+  draw(){
+    ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.size, this.size);
+  }
+}
+
+//display score with background layer
+function drawScore(){
+  ctx.fillStyle = 'black';
+  ctx.fillText('Score: ' + score, 50, 75);
+  ctx.fillStyle = 'orange';
+  ctx.fillText('Score: ' + score, 55, 80);
+}
+
+//display final score and end of game state with background layer
+function drawGameOver(){
+  ctx.textAlign = 'center'
+  ctx.fillStyle = 'black';
+  ctx.fillText('GAME OVER, your score is ' + score, canvas.width/2, canvas.height/2);
+  ctx.fillStyle = 'orange';
+  ctx.fillText('GAME OVER, your score is ' + score, canvas.width/2 + 5, canvas.height/2 + 5);
+}
+
+//event listener for mouse click
+window.addEventListener('click', function(e){
+  const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);
+  console.log(detectPixelColor);
+  const pc = detectPixelColor.data;
+  bees.forEach(object => {
+    if (object.randomColors[0] === pc[0] && object.randomColors[1] === pc[1] && object.randomColors[2] === pc[2]){
+      object.markedForDeletion = true;
+      score++;
+      explosions.push(new Explosion(object.x, object.y, object.width));
+    }
+  });
+});
+
+const bee = new Bee();
+//function to call different sized bee
+function animate(timestamp){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  collisionCtx.clearRect(0, 0, canvas.width, canvas.height);
+  let deltatime = timestamp - lastTime;
+  lastTime = timestamp;
+  timeToNextBee += deltatime;
+  if (timeToNextBee > beeInterval){
+    bees.push(new Bee());
+    timeToNextBee = 0;
+    bees.sort(function(a,b){
+      return a.width - b.width;
+    });
+  };
+  //place background image
+  ctx.drawImage(background, 0, 0);
+  drawScore();
+  [...bees, ...explosions].forEach(object => object.update(deltatime));
+  [...bees, ...explosions].forEach(object => object.draw());
+  bees = bees.filter(object => !object.markedForDeletion);
+  explosions = explosions.filter(object => !object.markedForDeletion);
+  if(!gameOver) requestAnimationFrame(animate);
+  else drawGameOver();
+
+}
+animate(0);
