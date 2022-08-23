@@ -25,6 +25,16 @@ a:hover {
   color: white;
 }
 
+#logo {
+  display: block;
+  position:relative;
+  bottom:760px;
+  right:300px;
+  width:300px;
+
+}
+
+
 #menu {
   width:0px;
   height:0px;
@@ -40,7 +50,7 @@ a:hover {
 
 #newGame {
   position:relative;
-  bottom:330px;
+  bottom:930px;
   right:300px;
   height:50px;
   width:600px;
@@ -74,7 +84,7 @@ a:hover {
   width:500px;
   background:#006680;
   position:relative;
-  bottom:345px;
+  bottom:925px;
   right:240px;
   text-align:center;
   font-size:30px;
@@ -104,7 +114,7 @@ a:hover {
   width:400px;
   background:#006680;
   position:relative;
-  bottom:360px;
+  bottom:920px;
   right:200px;
   font-size:30px;
   text-align:center;
@@ -134,7 +144,7 @@ a:hover {
   width:500px;
   background:#006680;
   position:relative;
-  bottom:345px;
+  bottom:925px;
   right:240px;
   text-align:center;
   font-size:30px;
