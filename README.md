@@ -35,7 +35,10 @@ The live link can be found here: https://poolpooer.github.io/Project-2/index.htm
 
 Bugs
 
-Hit detection with the wasps was tricky
+I had an issue with the hit boxes for the wasps but resolved it by changed the opacity on the second canvas layer.
+
+![canvas2](https://user-images.githubusercontent.com/43278914/186105036-2336057a-2080-4062-a785-c75deb51f742.JPG)
+
 
 Unresolved Bugs
 
