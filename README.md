@@ -31,7 +31,7 @@ HTML - No errors were returned when passing through the offical W3C validator.<b
 CSS - No errors were found when passing through the offical (Jigsaw) validator.<br>
 JS - No errors were found when passing through the offical JSHint validator.<br>
 
-The live link can be found here: https://poolpooer.github.io/Project-2/index.html
+The live link can be found here: https://poolpooer.github.io/Project-2/
 
 Bugs
 
